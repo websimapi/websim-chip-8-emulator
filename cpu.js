@@ -177,7 +177,7 @@ export class CPU {
                         this.v[x] = sum;
                         break;
                     case 0x5: // SUB Vx, Vy (Borrow)
-                        this.v[0xF] = this.v[x] > this.v[y] ? 1 : 0;
+                        this.v[0xF] = this.v[x] >= this.v[y] ? 1 : 0;
                         this.v[x] -= this.v[y];
                         break;
                     case 0x6: // SHR Vx
@@ -187,7 +187,7 @@ export class CPU {
                         this.v[x] >>= 1;
                         break;
                     case 0x7: // SUBN Vx, Vy
-                        this.v[0xF] = this.v[y] > this.v[x] ? 1 : 0;
+                        this.v[0xF] = this.v[y] >= this.v[x] ? 1 : 0;
                         this.v[x] = this.v[y] - this.v[x];
                         break;
                     case 0xE: // SHL Vx
@@ -287,11 +287,13 @@ export class CPU {
                         for (let registerIndex = 0; registerIndex <= x; registerIndex++) {
                             this.memory[this.i + registerIndex] = this.v[registerIndex];
                         }
+                        this.i += x + 1; // Quirk: Increment I
                         break;
                     case 0x65: // LD Vx, [I]
                         for (let registerIndex = 0; registerIndex <= x; registerIndex++) {
                             this.v[registerIndex] = this.memory[this.i + registerIndex];
                         }
+                        this.i += x + 1; // Quirk: Increment I
                         break;
                 }
                 break;
