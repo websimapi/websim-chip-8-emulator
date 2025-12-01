@@ -1,0 +1,149 @@
+:root {
+    --bg-color: #2c3e50;
+    --screen-bg: #000;
+    --screen-on: #33ff33;
+    --screen-off: #003300;
+    --key-bg: #34495e;
+    --key-active: #2ecc71;
+    --text-color: #ecf0f1;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    touch-action: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.controls {
+    display: flex;
+    gap: 5px;
+}
+
+select, button, input[type="file"] {
+    background: var(--key-bg);
+    color: white;
+    border: 1px solid #7f8c8d;
+    padding: 5px;
+    font-family: inherit;
+    border-radius: 4px;
+}
+
+/* Hide file input text on mobile to save space, use icon logic if complex, but simple for now */
+input[type="file"] {
+    width: 100px;
+}
+
+.screen-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2/1;
+    background: var(--screen-bg);
+    border: 4px solid #95a5a6;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    margin-bottom: 15px;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    display: block;
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    width: 100%;
+    flex-grow: 1; /* Take remaining space */
+    max-height: 40vh; /* Limit height */
+}
+
+.keypad button {
+    background: var(--key-bg);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background 0.1s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.keypad button:active, .keypad button.active {
+    background: var(--key-active);
+    transform: scale(0.95);
+}
+
+.status-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 0.8rem;
+}
+
+.instructions {
+    display: none; /* Hidden on mobile by default to save space */
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+@media (min-width: 600px) {
+    .instructions {
+        display: block;
+    }
+}
+
+/* CRT Scanline effect */
+.screen-container::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}

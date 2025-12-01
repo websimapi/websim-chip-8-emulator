@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CHIP-8 Emulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CHIP-8</h1>
+            <div class="controls">
+                <select id="romSelect">
+                    <option value="pong">Pong</option>
+                    <option value="invaders">Invaders</option>
+                    <option value="test">Test ROM</option>
+                    <option value="ibm">IBM Logo</option>
+                </select>
+                <input type="file" id="fileInput" accept=".ch8">
+                <button id="resetBtn">Reset</button>
+            </div>
+        </div>
+        
+        <div class="screen-container">
+            <canvas id="screen" width="640" height="320"></canvas>
+            <div id="led" class="led-off"></div>
+        </div>
+
+        <div class="keypad">
+            <button data-key="1">1</button>
+            <button data-key="2">2</button>
+            <button data-key="3">3</button>
+            <button data-key="C">C</button>
+            
+            <button data-key="4">4</button>
+            <button data-key="5">5</button>
+            <button data-key="6">6</button>
+            <button data-key="D">D</button>
+            
+            <button data-key="7">7</button>
+            <button data-key="8">8</button>
+            <button data-key="9">9</button>
+            <button data-key="E">E</button>
+            
+            <button data-key="A">A</button>
+            <button data-key="0">0</button>
+            <button data-key="B">B</button>
+            <button data-key="F">F</button>
+        </div>
+        
+        <div class="status-bar">
+            <span>Cycle Speed: <input type="range" id="speedRange" min="1" max="100" value="10"></span>
+            <button id="soundToggle">Sound: ON</button>
+        </div>
+        
+        <div class="instructions">
+            <p>Desktop: 1234 / QWER / ASDF / ZXCV map to Keypad</p>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
+
